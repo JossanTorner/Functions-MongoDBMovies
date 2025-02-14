@@ -36,18 +36,18 @@ class MovieFunctionTest {
 
     @Test
     void amountOfMoviesTest() {
-        assertEquals(movieFunction.amountOfMovies(getTestMovieList()), 5);
-        assertFalse(movieFunction.amountOfMovies(getTestMovieList()) == 0);
+        assertEquals(5, movieFunction.amountOfMovies(getTestMovieList()));
+        assertNotEquals(0, movieFunction.amountOfMovies(getTestMovieList()));
     }
 
     @Test
     void getLongestMovieTest() {
-        assertTrue(movieFunction.getLongestMovie(getTestMovieList()) == 152);
+        assertEquals(152, movieFunction.getLongestMovie(getTestMovieList()));
     }
 
     @Test
     void getGenresTest() {
-        assertEquals(movieFunction.getGenres(getTestMovieList()), 6);
+        assertEquals(6, movieFunction.getGenres(getTestMovieList()));
     }
 
     @Test
@@ -60,11 +60,27 @@ class MovieFunctionTest {
 
     @Test
     void getMovieWithSmallestCastTest() {
-        assertEquals(movieFunction.getMovieWithSmallestCast(getTestMovieList()), "Small cast movie");
+        assertEquals("Small cast movie", movieFunction.getMovieWithSmallestCast(getTestMovieList()));
     }
 
     @Test
     void getAmountOfActorsStarringInSeveralMoviesTest(){
-        assertEquals(movieFunction.getAmountOfActorsStarringInSeveralMovies(getTestMovieList()), 1);
+        assertEquals(1, movieFunction.getAmountOfActorsStarringInSeveralMovies(getTestMovieList()));
+    }
+
+    @Test
+    void getMostPopularActorsTest(){
+        assertTrue(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Morgan Freeman"));
+        assertFalse(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Heath Ledger"));
+    }
+
+    @Test
+    void getNumberOfLanguagesTest(){
+        assertEquals(4, movieFunction.getNumberOfLanguages(getTestMovieList()));
+    }
+
+    @Test
+    void movieNameDuplicateExistsTest(){
+        assertFalse(movieFunction.movieNameDuplicateExists(getTestMovieList()));
     }
 }

@@ -35,7 +35,7 @@ public class MovieFunction {
                 .entrySet().stream().max(Comparator.comparingLong(Map.Entry::getValue)).get().getKey();
     }
 
-    public long getLanguages(List<Movie> movies){
+    public long getNumberOfLanguages(List<Movie> movies){
         return movies.stream().map(Movie::getLanguages).flatMap(List::stream).distinct().count();
     }
 

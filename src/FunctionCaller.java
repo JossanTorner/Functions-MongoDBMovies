@@ -51,7 +51,7 @@ public class FunctionCaller {
     }
 
     public void outputNumberOfLanguages(){
-        System.out.println("Number of unique languages: " + func.getLanguages(movieList));
+        System.out.println("Number of unique languages: " + func.getNumberOfLanguages(movieList));
     }
 
     public void outputDuplicateMovieName(){
