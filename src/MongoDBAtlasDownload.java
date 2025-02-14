@@ -30,7 +30,7 @@ public class MongoDBAtlasDownload {
         return downloadedData;
     }
 
-    public static List<Movie> getDownloadedMovies(){
+    public static List<Movie> getAllMovies(){
         if (movieList == null) {
             movieList = getData();
         }
