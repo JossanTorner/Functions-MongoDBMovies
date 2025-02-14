@@ -19,7 +19,7 @@ public class MovieFunction {
         Comparator<Movie> movieComparator = Comparator.comparing(Movie::getImdbRating);
         double maxRating = movies.stream().max(movieComparator).get().getImdbRating();
         return movies.stream().filter(e -> e.getImdbRating() == maxRating).map(Movie::getCast).flatMap(List::stream).distinct().collect(Collectors.toList());
-//        return movies.stream().max(movieComparator).map(Movie::getCast).orElse(Collections.emptyList());
+        //return movies.stream().max(movieComparator).map(Movie::getCast).orElse(Collections.emptyList());
     }
 
     public String getMovieWithSmallestCast(List<Movie> movies){
