@@ -41,16 +41,6 @@ class FunctionsTest {
         assertEquals(6, movieFunction.countDistinctAttributes(getTestMovieList(), Movie::getGenres));
     }
 
-//    @Test
-//    void getNumberOfLanguagesTest(){
-//        assertEquals(4, movieFunction.getNumberOfLanguages(getTestMovieList()));
-//    }
-
-//    @Test
-//    void getNumberOfGenresTest() {
-//        assertEquals(6, movieFunction.getNumberOfGenres(getTestMovieList()));
-//    }
-
     @Test
     void getNumberOfMovies1975Test() {
         assertEquals(0, movieFunction.getNumberOfMovies(getTestMovieList()));
@@ -79,12 +69,6 @@ class FunctionsTest {
     void getNumberOfActorsInSeveralMoviesTest(){
         assertEquals(2, movieFunction.getNumberOfActorsInSeveralMovies(getTestMovieList()));
     }
-
-//    @Test
-//    void getActorsStarringInSeveralMoviesTest(){
-//        assertTrue(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Morgan Freeman"));
-//        assertFalse(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Heath Ledger"));
-//    }
 
     @Test
     void getActorsStarringInSeveralMoviesTest(){
