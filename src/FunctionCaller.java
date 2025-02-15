@@ -2,7 +2,7 @@ import java.util.List;
 
 public class FunctionCaller {
 
-    MovieFunction func = new MovieFunction();
+    Functions func = new Functions();
     List<Movie> movieList;
 
     public FunctionCaller(List<Movie> movieList) {
@@ -22,16 +22,21 @@ public class FunctionCaller {
     }
 
     public void outputAmountOfMovies() {
-        System.out.println("Movies 1975: " + func.amountOfMovies(movieList));
-    }
-
-    public void outputLongestMovie() {
-        System.out.println("Longest movie: " + func.getLongestMovie(movieList) + " min");
+        System.out.println("Movies 1975: " + func.getNumberOfMovies(movieList));
     }
 
     public void outputAmountOfGenres() {
-        System.out.println("Amount of genres: " + func.getGenres(movieList));
+        System.out.println("Amount of genres: " + func.countDistinctAttributes(movieList, Movie::getGenres));
     }
+
+    public void outputNumberOfLanguages(){
+        System.out.println("Amount of languages: " + func.countDistinctAttributes(movieList, Movie::getLanguages));
+    }
+
+    public void outputLongestMovie() {
+        System.out.println("Longest movie: " + func.getLongestMovieRuntime(movieList) + " min");
+    }
+
 
     public void outputActorsInTopRatedMovies() {
         System.out.println("Actors in top rated movie: ");
@@ -43,7 +48,7 @@ public class FunctionCaller {
     }
 
     public void outputAmountOfActorsStarringInSeveralMovies() {
-        System.out.println("Actors that occurs in more than 1 movie: " + func.getAmountOfActorsStarringInSeveralMovies(movieList));
+        System.out.println("Actors that occurs in more than 1 movie: " + func.getNumberOfActorsInSeveralMovies(movieList));
     }
 
     public void outputMostPopularActor(){
@@ -52,9 +57,6 @@ public class FunctionCaller {
         func.getMostPopularActors(movieList).forEach(System.out::println);
     }
 
-    public void outputNumberOfLanguages(){
-        System.out.println("Number of unique languages: " + func.getNumberOfLanguages(movieList));
-    }
 
     public void outputDuplicateMovieName(){
         System.out.println("A movie name occurs more than once: " + func.movieNameDuplicateExists(movieList));

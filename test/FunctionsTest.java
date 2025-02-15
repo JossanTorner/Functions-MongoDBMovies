@@ -6,9 +6,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MovieFunctionTest {
+class FunctionsTest {
 
-    MovieFunction movieFunction = new MovieFunction();
+    Functions movieFunction = new Functions();
 
     public List<Movie> getTestMovieList(){
         List<Movie> movieList = new ArrayList();
@@ -36,19 +36,30 @@ class MovieFunctionTest {
     }
 
     @Test
-    void amountOfMoviesTest() {
-        assertEquals(5, movieFunction.amountOfMovies(getTestMovieList()));
-        assertNotEquals(0, movieFunction.amountOfMovies(getTestMovieList()));
+    void countDistinctAttributesTest(){
+        assertEquals(4, movieFunction.countDistinctAttributes(getTestMovieList(), Movie::getLanguages));
+        assertEquals(6, movieFunction.countDistinctAttributes(getTestMovieList(), Movie::getGenres));
+    }
+
+//    @Test
+//    void getNumberOfLanguagesTest(){
+//        assertEquals(4, movieFunction.getNumberOfLanguages(getTestMovieList()));
+//    }
+
+//    @Test
+//    void getNumberOfGenresTest() {
+//        assertEquals(6, movieFunction.getNumberOfGenres(getTestMovieList()));
+//    }
+
+    @Test
+    void getNumberOfMoviesTest() {
+        assertEquals(5, movieFunction.getNumberOfMovies(getTestMovieList()));
+        assertNotEquals(0, movieFunction.getNumberOfMovies(getTestMovieList()));
     }
 
     @Test
-    void getLongestMovieTest() {
-        assertEquals(152, movieFunction.getLongestMovie(getTestMovieList()));
-    }
-
-    @Test
-    void getGenresTest() {
-        assertEquals(6, movieFunction.getGenres(getTestMovieList()));
+    void getLongestMovieRuntimeTest() {
+        assertEquals(152, movieFunction.getLongestMovieRuntime(getTestMovieList()));
     }
 
     @Test
@@ -65,8 +76,8 @@ class MovieFunctionTest {
     }
 
     @Test
-    void getAmountOfActorsStarringInSeveralMoviesTest(){
-        assertEquals(2, movieFunction.getAmountOfActorsStarringInSeveralMovies(getTestMovieList()));
+    void getNumberOfActorsInSeveralMoviesTest(){
+        assertEquals(2, movieFunction.getNumberOfActorsInSeveralMovies(getTestMovieList()));
     }
 
 //    @Test
@@ -80,11 +91,6 @@ class MovieFunctionTest {
         List<String> expected = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
         assertEquals(expected, movieFunction.getMostPopularActors(getTestMovieList()));
 
-    }
-
-    @Test
-    void getNumberOfLanguagesTest(){
-        assertEquals(4, movieFunction.getNumberOfLanguages(getTestMovieList()));
     }
 
     @Test
