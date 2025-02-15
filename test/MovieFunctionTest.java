@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +29,7 @@ class MovieFunctionTest {
                 9.0, List.of("English"), 152));
 
         movieList.add(new Movie("4", "Small cast movie", 2008, List.of("Drama"),
-                "No one", List.of("Morgan Freeman"),
+                "No one", List.of("Morgan Freeman", "Leonardo DiCaprio"),
                 9.0, List.of("English"), 100));
         return movieList;
 
@@ -65,13 +66,20 @@ class MovieFunctionTest {
 
     @Test
     void getAmountOfActorsStarringInSeveralMoviesTest(){
-        assertEquals(1, movieFunction.getAmountOfActorsStarringInSeveralMovies(getTestMovieList()));
+        assertEquals(2, movieFunction.getAmountOfActorsStarringInSeveralMovies(getTestMovieList()));
     }
+
+//    @Test
+//    void getMostPopularActorsTest(){
+//        assertTrue(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Morgan Freeman"));
+//        assertFalse(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Heath Ledger"));
+//    }
 
     @Test
     void getMostPopularActorsTest(){
-        assertTrue(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Morgan Freeman"));
-        assertFalse(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Heath Ledger"));
+        List<String> expected = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
+        assertEquals(expected, movieFunction.getMostPopularActors(getTestMovieList()));
+
     }
 
     @Test

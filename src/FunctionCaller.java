@@ -47,7 +47,9 @@ public class FunctionCaller {
     }
 
     public void outputMostPopularActor(){
-        System.out.println("Actor starring in most movies: " + func.getMostPopularActor(movieList));
+//        System.out.println("Actor starring in most movies: " + func.getMostPopularActor(movieList));
+        System.out.println("Actors starring in most movies:");
+        func.getMostPopularActors(movieList).forEach(System.out::println);
     }
 
     public void outputNumberOfLanguages(){

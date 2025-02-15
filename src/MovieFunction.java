@@ -32,9 +32,14 @@ public class MovieFunction {
                 .entrySet().stream().filter(e->e.getValue() > 1).count();
     }
 
-    public String getMostPopularActor(List<Movie> movies){
-        return movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(n->n, Collectors.counting()))
-                .entrySet().stream().max(Comparator.comparingLong(Map.Entry::getValue)).get().getKey();
+    public List<String> getMostPopularActors(List<Movie> movies){
+        //Tar fram en map med alla skådisar, namn som key, value antal filmer de varit med i: Collectors.counting räknar antalet gånger namnet uppkommer
+        Map<String, Long> frequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
+        //Tar fram en lista med nyckel-värdepar, får ut namn och antal filmer de varit med i
+        List<Map.Entry<String, Long>> entrySetOfFoundActors = frequencyMap.entrySet().stream().collect(Collectors.groupingBy(Map.Entry::getValue))
+                .entrySet().stream().max(Comparator.comparingLong(Map.Entry::getKey)).map(Map.Entry::getValue).orElse(List.of());
+        //Returnerar till sist en lista med bara namnen från entry-sets
+        return entrySetOfFoundActors.stream().map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
     public long getNumberOfLanguages(List<Movie> movies){
