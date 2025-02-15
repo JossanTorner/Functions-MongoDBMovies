@@ -37,7 +37,6 @@ public class FunctionCaller {
         System.out.println("Longest movie: " + func.getLongestMovieRuntime(movieList) + " min");
     }
 
-
     public void outputActorsInTopRatedMovies() {
         System.out.println("Actors in top rated movie: ");
         func.getHighestRatingMovieCast(movieList).forEach(System.out::println);
@@ -54,7 +53,7 @@ public class FunctionCaller {
     public void outputMostPopularActor(){
 //        System.out.println("Actor starring in most movies: " + func.getMostPopularActor(movieList));
         System.out.println("Actors starring in most movies:");
-        func.getMostPopularActors(movieList).forEach(System.out::println);
+        func.getActorsStarringInSeveralMovies(movieList).forEach(System.out::println);
     }
 
 

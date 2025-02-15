@@ -81,15 +81,15 @@ class FunctionsTest {
     }
 
 //    @Test
-//    void getMostPopularActorsTest(){
+//    void getActorsStarringInSeveralMoviesTest(){
 //        assertTrue(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Morgan Freeman"));
 //        assertFalse(movieFunction.getMostPopularActor(getTestMovieList()).equalsIgnoreCase("Heath Ledger"));
 //    }
 
     @Test
-    void getMostPopularActorsTest(){
+    void getActorsStarringInSeveralMoviesTest(){
         List<String> expected = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
-        assertEquals(expected, movieFunction.getMostPopularActors(getTestMovieList()));
+        assertEquals(expected, movieFunction.getActorsStarringInSeveralMovies(getTestMovieList()));
 
     }
 

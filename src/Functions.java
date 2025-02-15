@@ -32,7 +32,7 @@ public class Functions {
         return movies.stream().min(movieComparator).map(Movie::getTitle).orElse("");
     }
 
-    public List<String> getMostPopularActors(List<Movie> movies){
+    public List<String> getActorsStarringInSeveralMovies(List<Movie> movies){
         //Tar fram en map med alla skådisar, namn som key, value antal filmer de varit med i: Collectors.counting räknar antalet gånger namnet uppkommer
         Map<String, Long> frequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
         //Tar fram en lista med nyckel-värdepar, får ut namn och antal filmer de varit med i
