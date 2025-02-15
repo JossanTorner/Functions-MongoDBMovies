@@ -23,7 +23,8 @@ public class Functions {
     public List<String> getHighestRatingMovieCast(List<Movie> movies){
         Comparator<Movie> movieComparator = Comparator.comparing(Movie::getImdbRating);
         double maxRating = movies.stream().max(movieComparator).get().getImdbRating();
-        return movies.stream().filter(e -> e.getImdbRating() == maxRating).map(Movie::getCast).flatMap(List::stream).distinct().collect(Collectors.toList());
+        return movies.stream().filter(e -> e.getImdbRating() == maxRating).map(Movie::getCast)
+                .flatMap(List::stream).distinct().collect(Collectors.toList());
         //return movies.stream().max(movieComparator).map(Movie::getCast).orElse(Collections.emptyList());
     }
 
@@ -43,6 +44,7 @@ public class Functions {
     }
 
     public boolean movieNameDuplicateExists(List<Movie> movies){
-        return movies.stream().map(Movie::getTitle).collect(Collectors.groupingBy(n->n, Collectors.counting())).entrySet().stream().anyMatch(e -> e.getValue() > 1);
+        return movies.stream().map(Movie::getTitle).collect(Collectors.groupingBy(n->n, Collectors.counting()))
+                .entrySet().stream().anyMatch(e -> e.getValue() > 1);
     }
 }

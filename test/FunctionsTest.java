@@ -52,9 +52,9 @@ class FunctionsTest {
 //    }
 
     @Test
-    void getNumberOfMoviesTest() {
-        assertEquals(5, movieFunction.getNumberOfMovies(getTestMovieList()));
-        assertNotEquals(0, movieFunction.getNumberOfMovies(getTestMovieList()));
+    void getNumberOfMovies1975Test() {
+        assertEquals(0, movieFunction.getNumberOfMovies(getTestMovieList()));
+        assertNotEquals(5, movieFunction.getNumberOfMovies(getTestMovieList()));
     }
 
     @Test
