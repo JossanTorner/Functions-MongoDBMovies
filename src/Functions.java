@@ -29,8 +29,8 @@ public class Functions {
     }
 
     public String getMovieWithSmallestCast(List<Movie> movies){
-        Comparator<Movie> movieComparator = Comparator.comparing(e->e.getCast().size());
-        return movies.stream().min(movieComparator).map(Movie::getTitle).orElse("");
+        int smallestCastSize = movies.stream().mapToInt(e -> e.getCast().size()).min().orElse(0);
+        return movies.stream().filter(e->e.getCast().size() == smallestCastSize).map(Movie::getTitle).collect(Collectors.joining(", "));
     }
 
     public List<String> getActorsStarringInSeveralMovies(List<Movie> movies){

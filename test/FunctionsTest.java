@@ -31,6 +31,9 @@ class FunctionsTest {
         movieList.add(new Movie("4", "Small cast movie", 2008, List.of("Drama"),
                 "No one", List.of("Morgan Freeman", "Leonardo DiCaprio"),
                 9.0, List.of("English"), 100));
+        movieList.add(new Movie("4", "Another small cast movie", 2008, List.of("Drama"),
+                "No one", List.of("Blabla", "Trala"),
+                8.8, List.of("English"), 100));
         return movieList;
 
     }
@@ -62,7 +65,7 @@ class FunctionsTest {
 
     @Test
     void getMovieWithSmallestCastTest() {
-        assertEquals("Small cast movie", movieFunction.getMovieWithSmallestCast(getTestMovieList()));
+        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMovieWithSmallestCast(getTestMovieList()));
     }
 
     @Test
