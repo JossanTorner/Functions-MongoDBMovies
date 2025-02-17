@@ -8,7 +8,7 @@ public class MovieFunctions {
     }
 
     public long getNumberOfMovies(List<Movie> movies){
-        return movies.stream().filter(movie -> movie.getYear() == 1075).count();
+        return movies.stream().filter(movie -> movie.getYear() == 1975).count();
     }
 
     public long getNumberOfActorsInSeveralMovies(List<Movie> movies){
