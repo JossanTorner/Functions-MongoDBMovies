@@ -43,7 +43,7 @@ public class FunctionCaller {
     }
 
     public void outputMovieWithSmallestCast() {
-        System.out.println("\nMovies with the smallest cast: " + func.getMovieWithSmallestCast(movieList));
+        System.out.println("\nMovies with the smallest cast: " + func.getMoviesWithSmallestCast(movieList));
     }
 
     public void outputAmountOfActorsStarringInSeveralMovies() {

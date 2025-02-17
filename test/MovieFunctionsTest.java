@@ -64,8 +64,8 @@ class MovieFunctionsTest {
     }
 
     @Test
-    void getMovieWithSmallestCastTest() {
-        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMovieWithSmallestCast(getTestMovieList()));
+    void getMoviesWithSmallestCastTest() {
+        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMoviesWithSmallestCast(getTestMovieList()));
     }
 
     @Test
