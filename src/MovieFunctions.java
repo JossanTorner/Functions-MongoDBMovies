@@ -7,7 +7,6 @@ public class MovieFunctions {
         return movies.stream().filter(movie -> movie.getYear() == 1975).count();
     }
 
-
     public int getLongestMovieRuntime(List<Movie> movies){
         return movies.stream().mapToInt(Movie::getRuntime).max().getAsInt();
     }
@@ -35,7 +34,8 @@ public class MovieFunctions {
 
     public List<String> getActorsStarringInMostMovies(List<Movie> movies){
         Long highestAmountOfMovies = getActorFrequencyMap(movies).values().stream().max(Comparator.naturalOrder()).orElse(null);
-        return getActorFrequencyMap(movies).entrySet().stream().filter(e->e.getValue() == highestAmountOfMovies).map(Map.Entry::getKey).collect(Collectors.toList());
+        return getActorFrequencyMap(movies).entrySet().stream().filter(e->e.getValue() == highestAmountOfMovies)
+                .map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
     public boolean movieNameDuplicateExists(List<Movie> movies){
