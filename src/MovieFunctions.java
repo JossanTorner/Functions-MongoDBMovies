@@ -1,10 +1,10 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Functions {
+public class MovieFunctions {
 
     public long countDistinctAttributes(List<Movie> movies, MovieAttributeSearch movieAttributeSearch) {
-        return movies.stream().map(movieAttributeSearch::mapper).flatMap(List::stream).distinct().count();
+        return movies.stream().map(movieAttributeSearch::getAttribute).flatMap(List::stream).distinct().count();
     }
 
     public long getNumberOfMovies(List<Movie> movies){

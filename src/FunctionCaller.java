@@ -2,7 +2,7 @@ import java.util.List;
 
 public class FunctionCaller {
 
-    Functions func = new Functions();
+    MovieFunctions func = new MovieFunctions();
     List<Movie> movieList;
 
     public FunctionCaller(List<Movie> movieList) {
@@ -51,11 +51,9 @@ public class FunctionCaller {
     }
 
     public void outputMostPopularActor(){
-//        System.out.println("Actor starring in most movies: " + func.getMostPopularActor(movieList));
         System.out.println("Actors starring in most movies:");
         func.getActorsStarringInSeveralMovies(movieList).forEach(System.out::println);
     }
-
 
     public void outputDuplicateMovieName(){
         System.out.println("A movie name occurs more than once: " + func.movieNameDuplicateExists(movieList));

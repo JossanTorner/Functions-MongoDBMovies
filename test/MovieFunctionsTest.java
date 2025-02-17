@@ -6,9 +6,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FunctionsTest {
+class MovieFunctionsTest {
 
-    Functions movieFunction = new Functions();
+    MovieFunctions movieFunction = new MovieFunctions();
 
     public List<Movie> getTestMovieList(){
         List<Movie> movieList = new ArrayList();
