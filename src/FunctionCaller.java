@@ -22,7 +22,7 @@ public class FunctionCaller {
     }
 
     public void outputAmountOfMovies() {
-        System.out.println("\nMovies 1975: " + func.getNumberOfMovies(movieList));
+        System.out.println("\nMovies 1975: " + func.getNumberOfMovies(movieList, 1975));
     }
 
     public void outputAmountOfGenres() {
@@ -34,12 +34,12 @@ public class FunctionCaller {
     }
 
     public void outputLongestMovie() {
-        System.out.println("\nLongest movie: " + func.getRuntime(movieList, MovieFunctions.findMax) + " min");
+        System.out.println("\nLongest movie: " + func.getLongestOrShortestRuntime(movieList, MovieFunctions.findMax) + " min");
     }
 
     public void outputActorsInTopRatedMovies() {
         System.out.println("\nActors in top rated movie: ");
-        func.getHighestRatingMovieCast(movieList).forEach(System.out::println);
+        func.getMovieCastFromRating(movieList, MovieFunctions.findMax).forEach(System.out::println);
     }
 
     public void outputMovieWithSmallestCast() {
@@ -52,11 +52,12 @@ public class FunctionCaller {
 
     public void outputMostPopularActors(){
         System.out.println("\nActors starring in most movies:");
-        func.getActorsStarringInMostMovies(movieList).forEach(System.out::println);
+        func.getActorsStarringInMostOrLeastMovies(movieList, MovieFunctions.findMax).forEach(System.out::println);
     }
 
     public void outputDuplicateMovieName(){
-        System.out.println("\nDoes a movie name occur more than once? : " + func.movieNameDuplicateExists(movieList));
+        String answer = func.movieNameDuplicateExists(movieList) ? "\nThere exists at least one duplicate movie name" : "\nThere exists no duplicate movie names";
+        System.out.println(answer);
     }
 
 }
