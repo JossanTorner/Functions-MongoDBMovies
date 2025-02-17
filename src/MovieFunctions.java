@@ -9,6 +9,7 @@ public class MovieFunctions {
     public static MovieAttributeMapper countLanguages = Movie::getLanguages;
     public static MovieAttributeMapper countGenres = Movie::getGenres;
 
+    //Hämtar antalet filmer ett visst årtalg
     public long getNumberOfMovies(List<Movie> movies, int year){
         return movies.stream().filter(movie -> movie.getYear() == year).count();
     }
