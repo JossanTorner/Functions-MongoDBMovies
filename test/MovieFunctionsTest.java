@@ -74,9 +74,9 @@ class MovieFunctionsTest {
     }
 
     @Test
-    void getActorsStarringInSeveralMoviesTest(){
+    void getActorsStarringInMostMoviesTest(){
         List<String> expected = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
-        assertEquals(expected, movieFunction.getActorsStarringInSeveralMovies(getTestMovieList()));
+        assertEquals(expected, movieFunction.getActorsStarringInMostMovies(getTestMovieList()));
 
     }
 

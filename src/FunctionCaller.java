@@ -16,7 +16,7 @@ public class FunctionCaller {
         outputActorsInTopRatedMovies();
         outputMovieWithSmallestCast();
         outputAmountOfActorsStarringInSeveralMovies();
-        outputMostPopularActor();
+        outputMostPopularActors();
         outputNumberOfLanguages();
         outputDuplicateMovieName();
     }
@@ -50,9 +50,9 @@ public class FunctionCaller {
         System.out.println("\nActors that occurs in more than 1 movie: " + func.getNumberOfActorsInSeveralMovies(movieList));
     }
 
-    public void outputMostPopularActor(){
+    public void outputMostPopularActors(){
         System.out.println("\nActors starring in most movies:");
-        func.getActorsStarringInSeveralMovies(movieList).forEach(System.out::println);
+        func.getActorsStarringInMostMovies(movieList).forEach(System.out::println);
     }
 
     public void outputDuplicateMovieName(){
