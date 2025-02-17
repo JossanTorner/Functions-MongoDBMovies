@@ -2,7 +2,6 @@ import java.util.List;
 
 import org.bson.Document;
 
-import java.util.List;
 public class Movie {
 
     private String id;

@@ -51,21 +51,11 @@ class MovieFunctionsTest {
     }
 
     @Test
-    void getLongestMovieRuntimeTest() {
-        assertEquals(152, movieFunction.getLongestMovieRuntime(getTestMovieList()));
-    }
-
-    @Test
     void getHighestRatingMovieCastTest() {
         assertTrue(movieFunction.getHighestRatingMovieCast(getTestMovieList()).contains("Morgan Freeman"));
         assertTrue(movieFunction.getHighestRatingMovieCast(getTestMovieList()).contains("Tim Robbins"));
         assertTrue(movieFunction.getHighestRatingMovieCast(getTestMovieList()).contains("Bob Gunton"));
         assertFalse(movieFunction.getHighestRatingMovieCast(getTestMovieList()).contains("Elliot Page"));
-    }
-
-    @Test
-    void getMoviesWithSmallestCastTest() {
-        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMoviesWithSmallestCast(getTestMovieList()));
     }
 
     @Test
@@ -84,4 +74,28 @@ class MovieFunctionsTest {
     void movieNameDuplicateExistsTest(){
         assertFalse(movieFunction.movieNameDuplicateExists(getTestMovieList()));
     }
+
+    @Test
+    void getRuntimeTest(){
+        assertEquals(152, movieFunction.getRuntime(getTestMovieList(), Integer::max));
+        assertEquals(100, movieFunction.getRuntime(getTestMovieList(), Integer::min));
+    }
+
+    @Test
+    void getMovieWithSmallestOrLargestCastTest(){
+        assertEquals("Inception, The Shawshank Redemption, Parasite, The Dark Knight", movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMax));
+        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMin));
+    }
+
+    //
+//    @Test
+//    void getMoviesWithSmallestCastTest() {
+//        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList()));
+//    }
+
+    //
+//    @Test
+//    void getLongestMovieRuntimeTest() {
+//        assertEquals(152, movieFunction.getLongestMovieRuntime(getTestMovieList()));
+//    }
 }

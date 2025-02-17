@@ -26,15 +26,15 @@ public class FunctionCaller {
     }
 
     public void outputAmountOfGenres() {
-        System.out.println("\nAmount of genres: " + func.countDistinctAttributes(movieList, Movie::getGenres));
+        System.out.println("\nAmount of genres: " + func.countDistinctAttributes(movieList, MovieFunctions.countGenres));
     }
 
     public void outputNumberOfLanguages(){
-        System.out.println("\nAmount of languages: " + func.countDistinctAttributes(movieList, Movie::getLanguages));
+        System.out.println("\nAmount of languages: " + func.countDistinctAttributes(movieList, MovieFunctions.countLanguages));
     }
 
     public void outputLongestMovie() {
-        System.out.println("\nLongest movie: " + func.getLongestMovieRuntime(movieList) + " min");
+        System.out.println("\nLongest movie: " + func.getRuntime(movieList, MovieFunctions.findMax) + " min");
     }
 
     public void outputActorsInTopRatedMovies() {
@@ -43,7 +43,7 @@ public class FunctionCaller {
     }
 
     public void outputMovieWithSmallestCast() {
-        System.out.println("\nMovies with the smallest cast: " + func.getMoviesWithSmallestCast(movieList));
+        System.out.println("\nMovies with the smallest cast: " + func.getMoviesWithSmallestOrLargestCast(movieList, MovieFunctions.findMin));
     }
 
     public void outputAmountOfActorsStarringInSeveralMovies() {
