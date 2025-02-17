@@ -9,12 +9,12 @@ public class MovieFunctions {
     public static MovieAttributeMapper countLanguages = Movie::getLanguages;
     public static MovieAttributeMapper countGenres = Movie::getGenres;
 
-    //Hämtar antalet filmer ett visst årtalg
+    //Hämtar antalet filmer ett visst årtal
     public long getNumberOfMovies(List<Movie> movies, int year){
         return movies.stream().filter(movie -> movie.getYear() == year).count();
     }
 
-    //Kan hämta längsta eller kortaste runtime
+    //Kan hämta längsta eller kortast runtime av filmer i listan
     public double getLongestOrShortestRuntime(List<Movie> movies, FindExtreme findExtreme){
         return movies.stream().mapToDouble(Movie::getRuntime).reduce(findExtreme::maxOrMin).orElse(0);
     }
@@ -50,6 +50,7 @@ public class MovieFunctions {
                 .map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
+    //Plockar ut true eller false om det finns filmer som heter samma sak
     public boolean movieNameDuplicateExists(List<Movie> movies){
         return movies.stream().map(Movie::getTitle).collect(Collectors.groupingBy(n->n, Collectors.counting()))
                 .entrySet().stream().anyMatch(e -> e.getValue() > 1);

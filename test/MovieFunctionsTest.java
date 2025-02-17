@@ -40,8 +40,8 @@ class MovieFunctionsTest {
 
     @Test
     void countDistinctAttributesTest(){
-        assertEquals(4, movieFunction.countDistinctAttributes(getTestMovieList(), Movie::getLanguages));
-        assertEquals(6, movieFunction.countDistinctAttributes(getTestMovieList(), Movie::getGenres));
+        assertEquals(4, movieFunction.countDistinctAttributes(getTestMovieList(), MovieFunctions.countLanguages));
+        assertEquals(6, movieFunction.countDistinctAttributes(getTestMovieList(), MovieFunctions.countGenres));
     }
 
     @Test
@@ -79,13 +79,16 @@ class MovieFunctionsTest {
 
     @Test
     void getLongestOrShortestRuntimeTest(){
-        assertEquals(152, movieFunction.getLongestOrShortestRuntime(getTestMovieList(), Double::max));
-        assertEquals(100, movieFunction.getLongestOrShortestRuntime(getTestMovieList(), Double::min));
+        assertEquals(152, movieFunction.getLongestOrShortestRuntime(getTestMovieList(), MovieFunctions.findMax));
+        assertEquals(100, movieFunction.getLongestOrShortestRuntime(getTestMovieList(), MovieFunctions.findMin));
+        assertFalse(movieFunction.getLongestOrShortestRuntime(getTestMovieList(), MovieFunctions.findMax) == 60);
     }
 
     @Test
-    void getMovieWithSmallestOrLargestCastTest(){
-        assertEquals("Inception, The Shawshank Redemption, Parasite, The Dark Knight", movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMax));
-        assertEquals("Small cast movie, Another small cast movie", movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMin));
+    void getMoviesWithSmallestOrLargestCastTest(){
+        assertEquals("Inception, The Shawshank Redemption, Parasite, The Dark Knight",
+                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMax));
+        assertEquals("Small cast movie, Another small cast movie",
+                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMin));
     }
 }
