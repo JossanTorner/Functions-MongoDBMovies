@@ -5,8 +5,8 @@ public class MovieFunctions {
 
     public static FindExtreme findMax = Integer::max;
     public static FindExtreme findMin = Integer::min;
-    public static MovieAttributeSearch countLanguages = Movie::getLanguages;
-    public static MovieAttributeSearch countGenres = Movie::getGenres;
+    public static MovieAttributeMapper countLanguages = Movie::getLanguages;
+    public static MovieAttributeMapper countGenres = Movie::getGenres;
 
     public long getNumberOfMovies(List<Movie> movies){
         return movies.stream().filter(movie -> movie.getYear() == 1975).count();
@@ -16,14 +16,13 @@ public class MovieFunctions {
         return movies.stream().mapToInt(Movie::getRuntime).reduce(findExtreme::maxOrMin).orElse(0);
     }
 
-    public long countDistinctAttributes(List<Movie> movies, MovieAttributeSearch movieAttributeSearch) {
-        return movies.stream().map(movieAttributeSearch::getAttribute).flatMap(List::stream).distinct().count();
+    public long countDistinctAttributes(List<Movie> movies, MovieAttributeMapper movieAttributeMapper) {
+        return movies.stream().map(movieAttributeMapper::getAttribute).flatMap(List::stream).distinct().count();
     }
 
     public List<String> getHighestRatingMovieCast(List<Movie> movies){
-        Comparator<Movie> movieComparator = Comparator.comparing(Movie::getImdbRating);
-        double maxRating = movies.stream().max(movieComparator).get().getImdbRating();
-        return movies.stream().filter(e -> e.getImdbRating() == maxRating).map(Movie::getCast)
+        double max = movies.stream().map(Movie::getImdbRating).mapToDouble(rating -> rating).max().orElse(0);
+        return movies.stream().filter(e -> e.getImdbRating() == max).map(Movie::getCast)
                 .flatMap(List::stream).distinct().collect(Collectors.toList());
     }
 
@@ -39,8 +38,8 @@ public class MovieFunctions {
 
     public List<String> getActorsStarringInMostMovies(List<Movie> movies){
         Map<String, Long> actorFrequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
-        Long amountOfMovies = actorFrequencyMap.values().stream().max(Comparator.naturalOrder()).orElse(null);
-        return actorFrequencyMap.entrySet().stream().filter(e->e.getValue() == amountOfMovies)
+        Long maxAmountOfMovies = actorFrequencyMap.values().stream().max(Comparator.naturalOrder()).orElse(null);
+        return actorFrequencyMap.entrySet().stream().filter(e->e.getValue() == maxAmountOfMovies)
                 .map(Map.Entry::getKey).collect(Collectors.toList());
     }
 

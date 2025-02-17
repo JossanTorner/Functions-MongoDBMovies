@@ -2,8 +2,8 @@ import java.util.List;
 
 public class FunctionCaller {
 
-    MovieFunctions func = new MovieFunctions();
-    List<Movie> movieList;
+    private final MovieFunctions func = new MovieFunctions();
+    private final List<Movie> movieList;
 
     public FunctionCaller(List<Movie> movieList) {
         this.movieList = movieList;

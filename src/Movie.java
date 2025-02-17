@@ -4,15 +4,15 @@ import org.bson.Document;
 
 public class Movie {
 
-    private String id;
-    private String title;
-    private int year;
-    private int runtime;
-    private List<String> genres;
-    private String director;
-    private List<String> cast;
-    private double imdbRating;
-    private List<String> languages;
+    private final String id;
+    private final String title;
+    private final int year;
+    private final int runtime;
+    private final List<String> genres;
+    private final String director;
+    private final List<String> cast;
+    private final double imdbRating;
+    private final List<String> languages;
 
     // Constructor
     public Movie(String id, String title, int year, List<String> genres, String director, List<String> cast, double imdbRating, List<String> languages, int runtime) {
