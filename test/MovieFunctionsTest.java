@@ -62,6 +62,7 @@ class MovieFunctionsTest {
     @Test
     void getNumberOfActorsInSeveralMoviesTest(){
         assertEquals(2, movieFunction.getNumberOfActorsInSeveralMovies(getTestMovieList()));
+        assertNotEquals(1, movieFunction.getNumberOfActorsInSeveralMovies(getTestMovieList()));
     }
 
     @Test
