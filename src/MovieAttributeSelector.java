@@ -1,6 +1,6 @@
 import java.util.List;
 
 @FunctionalInterface
-public interface MovieAttributeMapper {
+public interface MovieAttributeSelector {
     List <String> getAttribute(Movie movie);
 }
