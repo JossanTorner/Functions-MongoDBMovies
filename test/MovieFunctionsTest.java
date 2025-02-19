@@ -53,10 +53,14 @@ class MovieFunctionsTest {
 
     @Test
     void getMovieCastFromRatingTest() {
-        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.findMax).contains("Morgan Freeman"));
-        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.findMax).contains("Tim Robbins"));
-        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.findMax).contains("Bob Gunton"));
-        assertFalse(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.findMax).contains("Elliot Page"));
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMax).contains("Morgan Freeman"));
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMax).contains("Tim Robbins"));
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMax).contains("Bob Gunton"));
+        assertFalse(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMax).contains("Elliot Page"));
+
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Song Kang-ho"));
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Lee Sun-kyun"));
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Cho Yeo-jeong"));
     }
 
     @Test
@@ -68,9 +72,9 @@ class MovieFunctionsTest {
     @Test
     void getActorsStarringInMostOrLeastMoviesTest(){
         List<String> expectedMostMovies = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
-        assertEquals(expectedMostMovies, movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.findMax));
-        assertFalse(movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.findMin).contains("Morgan Freeman"));
-        assertFalse(movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.findMin).contains("Leonardo DiCaprio"));
+        assertEquals(expectedMostMovies, movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.calculateMax));
+        assertFalse(movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Morgan Freeman"));
+        assertFalse(movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Leonardo DiCaprio"));
     }
 
     @Test
@@ -79,17 +83,18 @@ class MovieFunctionsTest {
     }
 
     @Test
-    void getLongestOrShortestRuntimeTest(){
-        assertEquals(152, movieFunction.getLongestOrShortestRuntime(getTestMovieList(), MovieFunctions.findMax));
-        assertEquals(100, movieFunction.getLongestOrShortestRuntime(getTestMovieList(), MovieFunctions.findMin));
-        assertFalse(movieFunction.getLongestOrShortestRuntime(getTestMovieList(), MovieFunctions.findMax) == 60);
+    void getRuntimeTest(){
+        assertEquals(152, movieFunction.getRuntime(getTestMovieList(), MovieFunctions.calculateMax));
+        assertEquals(100, movieFunction.getRuntime(getTestMovieList(), MovieFunctions.calculateMin));
+        assertEquals(129, movieFunction.getRuntime(getTestMovieList(), MovieFunctions.calculateAverage));
+        assertFalse(movieFunction.getRuntime(getTestMovieList(), MovieFunctions.calculateMax) == 60);
     }
 
     @Test
     void getMoviesWithSmallestOrLargestCastTest(){
         assertEquals("Inception, The Shawshank Redemption, Parasite, The Dark Knight",
-                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMax));
+                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.calculateMax));
         assertEquals("Small cast movie, Another small cast movie",
-                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.findMin));
+                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.calculateMin));
     }
 }

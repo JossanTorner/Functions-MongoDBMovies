@@ -34,16 +34,16 @@ public class FunctionCaller {
     }
 
     public void outputLongestMovie() {
-        System.out.println("\nLongest movie: " + func.getLongestOrShortestRuntime(movieList, MovieFunctions.findMax) + " min");
+        System.out.println("\nLongest movie: " + func.getRuntime(movieList, MovieFunctions.calculateMax) + " min");
     }
 
     public void outputActorsInTopRatedMovies() {
         System.out.println("\nActors in top rated movie: ");
-        func.getMovieCastFromRating(movieList, MovieFunctions.findMax).forEach(System.out::println);
+        func.getMovieCastFromRating(movieList, MovieFunctions.calculateMax).forEach(System.out::println);
     }
 
     public void outputMovieWithSmallestCast() {
-        System.out.println("\nMovies with the smallest cast: " + func.getMoviesWithSmallestOrLargestCast(movieList, MovieFunctions.findMin));
+        System.out.println("\nMovies with the smallest cast: " + func.getMoviesWithSmallestOrLargestCast(movieList, MovieFunctions.calculateMin));
     }
 
     public void outputAmountOfActorsStarringInSeveralMovies() {
@@ -52,7 +52,7 @@ public class FunctionCaller {
 
     public void outputMostPopularActors(){
         System.out.println("\nActors starring in most movies:");
-        func.getActorsStarringInMostOrLeastMovies(movieList, MovieFunctions.findMax).forEach(System.out::println);
+        func.getActorsStarringInMostOrLeastMovies(movieList, MovieFunctions.calculateMax).forEach(System.out::println);
     }
 
     public void outputDuplicateMovieName(){
