@@ -62,6 +62,7 @@ class MovieFunctionsTest {
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Lee Sun-kyun"));
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Cho Yeo-jeong"));
 
+        //Average blir 8.9 vilket ingen film har, listan borde vara tom
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
     }
 
@@ -77,7 +78,9 @@ class MovieFunctionsTest {
         assertEquals(expectedMostMovies, movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMax));
         assertFalse(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Morgan Freeman"));
         assertFalse(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Leonardo DiCaprio"));
-        assertTrue(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
+        //Min och average borde vara samma pga avrundning för att få fram vanligast förkomna antal filmer
+        assertEquals(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateAverage),
+                movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMin));
     }
 
     @Test
@@ -95,10 +98,13 @@ class MovieFunctionsTest {
 
     @Test
     void getMoviesAfterCastSizeTest(){
-        assertEquals("Inception, The Shawshank Redemption, Parasite, The Dark Knight",
-                movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateMax));
-        assertEquals("Small cast movie, Another small cast movie",
-                movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateMin));
-        assertTrue(movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
+        List<String> expectedMax = Arrays.asList("Inception", "The Shawshank Redemption", "Parasite", "The Dark Knight");
+        List<String> expectedMin = Arrays.asList("Small cast movie", "Another small cast movie");
+
+        assertEquals(expectedMax, movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateMax));
+        assertEquals(expectedMin, movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateMin));
+        assertTrue(movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateAverage).contains("Inception"));
+        //Max och average vara samma pga min avrundning för att få fram vanligaste förekomna cast size
+        assertEquals(expectedMax, (movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateAverage)));
     }
 }

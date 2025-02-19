@@ -43,7 +43,8 @@ public class FunctionCaller {
     }
 
     public void outputMovieWithSmallestCast() {
-        System.out.println("\nMovies with the smallest cast: " + func.getMoviesAfterCastSize(movieList, MovieFunctions.calculateMin));
+        System.out.println("\nMovies with the smallest cast: ");
+        func.getMoviesAfterCastSize(movieList, MovieFunctions.calculateMin).forEach(System.out::println);
     }
 
     public void outputAmountOfActorsStarringInSeveralMovies() {
@@ -53,12 +54,11 @@ public class FunctionCaller {
     public void outputMostPopularActors(){
         System.out.println("\nActors starring in most movies:");
         func.getActorsInAmountOfMovies(movieList, MovieFunctions.calculateMax).forEach(System.out::println);
-        System.out.println("AVERAGE");
-        func.getActorsInAmountOfMovies(movieList, MovieFunctions.calculateAverage).forEach(System.out::println);
     }
 
     public void outputDuplicateMovieName(){
-        String answer = func.movieNameDuplicateExists(movieList) ? "\nThere exists at least one duplicate movie name" : "\nThere exists no duplicate movie names";
+        String answer = func.movieNameDuplicateExists(movieList) ?
+                "\nThere exists at least one duplicate movie name" : "\nThere exists no duplicate movie names";
         System.out.println(answer);
     }
 
