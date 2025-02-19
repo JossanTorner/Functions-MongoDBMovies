@@ -7,9 +7,9 @@ public class MovieFunctions {
     public static MovieAttributeSelector countLanguages = Movie::getLanguages;
     public static MovieAttributeSelector countGenres = Movie::getGenres;
 
-    public static MovieCalculator calculateMax = e->e.max().orElse(0);
-    public static MovieCalculator calculateMin = e->e.min().orElse(0);
-    public static MovieCalculator calculateAverage = e->e.average().orElse(0);
+    public static Calculator calculateMax = e->e.max().orElse(0);
+    public static Calculator calculateMin = e->e.min().orElse(0);
+    public static Calculator calculateAverage = e->e.average().orElse(0);
 
     //Fråga: Hur många filmer gjordes 1975?
     //Hämtar antalet filmer ett visst årtal
@@ -19,8 +19,8 @@ public class MovieFunctions {
 
     //Fråga: Hitta längden på den film som var längst (högst runtime).
     //Kan hämta längsta, kortaste eller medelvärde runtime av filmer i listan
-    public double getRuntime(List<Movie> movies, MovieCalculator calculator){
-        return Math.round(calculator.calculate(movies.stream().mapToDouble(Movie::getRuntime)));
+    public double getRuntime(List<Movie> movies, Calculator calculator){
+        return calculator.calculate(movies.stream().mapToDouble(Movie::getRuntime));
     }
 
     //Fråga: Hur många UNIKA genrer har filmerna?
@@ -32,7 +32,7 @@ public class MovieFunctions {
 
     //Fråga: Vilka skådisar spelade i den film som hade högst imdb-rating?
     //Ger lista med cast i filmer med högst, lägst eller medelvärde rating
-    public List<String> getMovieCastFromRating(List<Movie> movies, MovieCalculator calculator){
+    public List<String> getMovieCastFromRating(List<Movie> movies, Calculator calculator){
         double foundRating = calculator.calculate(movies.stream().map(Movie::getImdbRating).mapToDouble(rating -> rating));
         //avrundar till närmsta decimal, så om average skulle ge oss 7.886 omvandlas det här till 7.9
         foundRating = Math.round(foundRating*10)/10.0;
@@ -42,8 +42,8 @@ public class MovieFunctions {
     }
 
     //Fråga: Vad är titeln på den film som hade minst antal skådisar listade?
-    //Ger namn på filmer med störst, minst eller vanligast förekomna storlek på cast
-    public List<String> getMoviesAfterCastSize(List<Movie> movies, MovieCalculator calculator){
+    //Ger namn på filmer med störst, minst eller vanligast förekomna storlek på roll-lista
+    public List<String> getMoviesAfterCastSize(List<Movie> movies, Calculator calculator){
         double castSize = Math.round(calculator.calculate(movies.stream().mapToDouble(e -> e.getCast().size())));
         return movies.stream().filter(e->e.getCast().size() == castSize).map(Movie::getTitle).collect(Collectors.toList());
     }
@@ -56,7 +56,7 @@ public class MovieFunctions {
 
     //Fråga: Vad hette den skådis som var med i flest filmer?
     //Kan få ut skådis/skådisar i flest, minst eller vanligast förekomna antal filmer
-    public List<String> getActorsInAmountOfMovies(List<Movie> movies, MovieCalculator calculator){
+    public List<String> getActorsInAmountOfMovies(List<Movie> movies, Calculator calculator){
         Map<String, Long> actorFrequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
         double amountOfMovies = Math.round(calculator.calculate(actorFrequencyMap.values().stream().mapToDouble(e->e)));
         return actorFrequencyMap.entrySet().stream().filter(e->e.getValue() == amountOfMovies)

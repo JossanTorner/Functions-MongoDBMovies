@@ -38,12 +38,15 @@ class MovieFunctionsTest {
 
     }
 
+    //Fråga: Hur många UNIKA genrer har filmerna?
+    //Fråga: Hur många UNIKA språk har filmerna?
     @Test
     void countDistinctAttributesTest(){
         assertEquals(4, movieFunction.countDistinctAttributes(getTestMovieList(), MovieFunctions.countLanguages));
         assertEquals(6, movieFunction.countDistinctAttributes(getTestMovieList(), MovieFunctions.countGenres));
     }
 
+    //Fråga: Hur många filmer gjordes 1975?
     @Test
     void getNumberOfMovies1975Test() {
         assertEquals(0, movieFunction.getNumberOfMovies(getTestMovieList(), 1975));
@@ -51,6 +54,7 @@ class MovieFunctionsTest {
         assertEquals(3, movieFunction.getNumberOfMovies(getTestMovieList(), 2008));
     }
 
+    //Fråga: Vilka skådisar spelade i den film som hade högst imdb-rating?
     @Test
     void getMovieCastFromRatingTest() {
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMax).contains("Morgan Freeman"));
@@ -66,12 +70,14 @@ class MovieFunctionsTest {
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
     }
 
+    //Fråga: Hur många skådisar var med i mer än 1 film?
     @Test
     void getNumberOfActorsInSeveralMoviesTest(){
         assertEquals(2, movieFunction.getNumberOfActorsInSeveralMovies(getTestMovieList()));
         assertNotEquals(1, movieFunction.getNumberOfActorsInSeveralMovies(getTestMovieList()));
     }
 
+    //Fråga: Vad hette den skådis som var med i flest filmer?
     @Test
     void getActorsInAmountOfMoviesTest(){
         List<String> expectedMostMovies = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
@@ -83,11 +89,13 @@ class MovieFunctionsTest {
                 movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMin));
     }
 
+    //Fråga: Finns det någon titel som mer än en film har?
     @Test
     void movieNameDuplicateExistsTest(){
         assertFalse(movieFunction.movieNameDuplicateExists(getTestMovieList()));
     }
 
+    //Fråga: Hitta längden på den film som var längst (högst runtime).
     @Test
     void getRuntimeTest(){
         assertEquals(152, movieFunction.getRuntime(getTestMovieList(), MovieFunctions.calculateMax));
@@ -96,6 +104,7 @@ class MovieFunctionsTest {
         assertFalse(movieFunction.getRuntime(getTestMovieList(), MovieFunctions.calculateMax) == 60);
     }
 
+    //Fråga: Vad är titeln på den film som hade minst antal skådisar listade?
     @Test
     void getMoviesAfterCastSizeTest(){
         List<String> expectedMax = Arrays.asList("Inception", "The Shawshank Redemption", "Parasite", "The Dark Knight");

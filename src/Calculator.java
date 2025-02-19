@@ -1,6 +1,6 @@
 import java.util.stream.DoubleStream;
 
 @FunctionalInterface
-public interface MovieCalculator {
+public interface Calculator {
     double calculate(DoubleStream stream);
 }
