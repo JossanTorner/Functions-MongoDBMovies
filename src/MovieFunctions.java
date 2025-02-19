@@ -17,11 +17,11 @@ public class MovieFunctions {
 
     //Fråga: Hitta längden på den film som var längst (högst runtime).
     //Kan hämta längsta eller kortast runtime av filmer i listan
-    public double getLongestOrShortestRuntime(List<Movie> movies, MinMaxSelector findExtreme){
-        return movies.stream().mapToDouble(Movie::getRuntime).reduce(findExtreme::select).orElse(0);
+    public double getLongestOrShortestRuntime(List<Movie> movies, MinMaxSelector minMaxSelector){
+        return movies.stream().mapToDouble(Movie::getRuntime).reduce(minMaxSelector::select).orElse(0);
     }
 
-    //Fråga: Hur många UNIKA genrer hade filmerna från 1975?
+    //Fråga: Hur många UNIKA genrer hade filmerna?
     //Fråga: Hur många UNIKA språk har filmerna?
     //Räkna antal UNIKA av någonting, i vårt fall språk och genrer
     public long countDistinctAttributes(List<Movie> movies, MovieAttributeSelector movieAttributeSelector) {
@@ -31,8 +31,8 @@ public class MovieFunctions {
     //Fråga: Vilka skådisar spelade i den film som hade högst imdb-rating?
     //Ger lista med cast i filmer med högst rating eller lägst rating
     public List<String> getMovieCastFromRating(List<Movie> movies, MinMaxSelector minMaxSelector){
-        double max = movies.stream().map(Movie::getImdbRating).mapToDouble(rating -> rating).reduce(minMaxSelector::select).orElse(0);
-        return movies.stream().filter(e -> e.getImdbRating() == max).map(Movie::getCast)
+        double foundRating = movies.stream().map(Movie::getImdbRating).mapToDouble(rating -> rating).reduce(minMaxSelector::select).orElse(0);
+        return movies.stream().filter(e -> e.getImdbRating() == foundRating).map(Movie::getCast)
                 .flatMap(List::stream).distinct().collect(Collectors.toList());
     }
 
