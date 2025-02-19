@@ -61,6 +61,8 @@ class MovieFunctionsTest {
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Song Kang-ho"));
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Lee Sun-kyun"));
         assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateMin).contains("Cho Yeo-jeong"));
+
+        assertTrue(movieFunction.getMovieCastFromRating(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
     }
 
     @Test
@@ -70,11 +72,12 @@ class MovieFunctionsTest {
     }
 
     @Test
-    void getActorsStarringInMostOrLeastMoviesTest(){
+    void getActorsInAmountOfMoviesTest(){
         List<String> expectedMostMovies = Arrays.asList("Leonardo DiCaprio", "Morgan Freeman");
-        assertEquals(expectedMostMovies, movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.calculateMax));
-        assertFalse(movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Morgan Freeman"));
-        assertFalse(movieFunction.getActorsStarringInMostOrLeastMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Leonardo DiCaprio"));
+        assertEquals(expectedMostMovies, movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMax));
+        assertFalse(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Morgan Freeman"));
+        assertFalse(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateMin).contains("Leonardo DiCaprio"));
+        assertTrue(movieFunction.getActorsInAmountOfMovies(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
     }
 
     @Test
@@ -91,10 +94,11 @@ class MovieFunctionsTest {
     }
 
     @Test
-    void getMoviesWithSmallestOrLargestCastTest(){
+    void getMoviesAfterCastSizeTest(){
         assertEquals("Inception, The Shawshank Redemption, Parasite, The Dark Knight",
-                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.calculateMax));
+                movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateMax));
         assertEquals("Small cast movie, Another small cast movie",
-                movieFunction.getMoviesWithSmallestOrLargestCast(getTestMovieList(), MovieFunctions.calculateMin));
+                movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateMin));
+        assertTrue(movieFunction.getMoviesAfterCastSize(getTestMovieList(), MovieFunctions.calculateAverage).isEmpty());
     }
 }
