@@ -1,6 +1,6 @@
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
-
 public class MovieFunctions {
 
     //Här är klassens instanser av funktionsgränssnitt som kan användas för att göra olika beräkningar med metoderna
@@ -32,10 +32,11 @@ public class MovieFunctions {
 
     //Fråga: Vilka skådisar spelade i den film som hade högst imdb-rating?
     //Ger lista med cast i filmer med högst, lägst eller medelvärde rating
+    //pga denna metod valde jag att låta calculator hantera doublestream samt returnera double, för att kunna få en rating med decimaltal
     public List<String> getMovieCastFromRating(List<Movie> movies, Calculator calculator){
         double foundRating = calculator.calculate(movies.stream().map(Movie::getImdbRating).mapToDouble(rating -> rating));
         //avrundar till närmsta decimal, så om average skulle ge oss 7.886 omvandlas det här till 7.9
-        foundRating = Math.round(foundRating*10)/10.0;
+        foundRating = foundRating*10/10.0;
         double finalFoundRating = foundRating;
         return movies.stream().filter(e -> e.getImdbRating() == finalFoundRating).map(Movie::getCast)
                 .flatMap(List::stream).distinct().collect(Collectors.toList());
@@ -44,7 +45,7 @@ public class MovieFunctions {
     //Fråga: Vad är titeln på den film som hade minst antal skådisar listade?
     //Ger namn på filmer med störst, minst eller vanligast förekomna storlek på roll-lista
     public List<String> getMoviesAfterCastSize(List<Movie> movies, Calculator calculator){
-        double castSize = Math.round(calculator.calculate(movies.stream().mapToDouble(e -> e.getCast().size())));
+        double castSize = calculator.calculate(movies.stream().mapToDouble(e -> e.getCast().size()));
         return movies.stream().filter(e->e.getCast().size() == castSize).map(Movie::getTitle).collect(Collectors.toList());
     }
 
@@ -58,7 +59,7 @@ public class MovieFunctions {
     //Kan få ut skådis/skådisar i flest, minst eller vanligast förekomna antal filmer
     public List<String> getActorsInAmountOfMovies(List<Movie> movies, Calculator calculator){
         Map<String, Long> actorFrequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
-        double amountOfMovies = Math.round(calculator.calculate(actorFrequencyMap.values().stream().mapToDouble(e->e)));
+        double amountOfMovies = calculator.calculate(actorFrequencyMap.values().stream().mapToDouble(e->e));
         return actorFrequencyMap.entrySet().stream().filter(e->e.getValue() == amountOfMovies)
                 .map(Map.Entry::getKey).collect(Collectors.toList());
     }
