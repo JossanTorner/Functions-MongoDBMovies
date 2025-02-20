@@ -6,10 +6,8 @@ public class MovieFunctions {
     //Här är klassens instanser av funktionsgränssnitt som kan användas för att göra olika beräkningar med metoderna
     public static MovieAttributeSelector countLanguages = Movie::getLanguages;
     public static MovieAttributeSelector countGenres = Movie::getGenres;
-
     public static Calculator calculateMax = e->e.max().orElse(0);
     public static Calculator calculateMin = e->e.min().orElse(0);
-    public static Calculator calculateAverage = e->e.average().orElse(0);
 
     //Fråga: Hur många filmer gjordes 1975?
     //Hämtar antalet filmer ett visst årtal
@@ -31,14 +29,10 @@ public class MovieFunctions {
     }
 
     //Fråga: Vilka skådisar spelade i den film som hade högst imdb-rating?
-    //Ger lista med cast i filmer med högst, lägst eller medelvärde rating
-    //pga denna metod valde jag att låta calculator hantera doublestream samt returnera double, för att kunna få en rating med decimaltal
+    //Ger lista med cast i filmer med högst eller lägst rating
     public List<String> getMovieCastFromRating(List<Movie> movies, Calculator calculator){
         double foundRating = calculator.calculate(movies.stream().map(Movie::getImdbRating).mapToDouble(rating -> rating));
-        //avrundar till närmsta decimal, så om average skulle ge oss 7.886 omvandlas det här till 7.9
-        foundRating = foundRating*10/10.0;
-        double finalFoundRating = foundRating;
-        return movies.stream().filter(e -> e.getImdbRating() == finalFoundRating).map(Movie::getCast)
+        return movies.stream().filter(e -> e.getImdbRating() == foundRating).map(Movie::getCast)
                 .flatMap(List::stream).distinct().collect(Collectors.toList());
     }
 
