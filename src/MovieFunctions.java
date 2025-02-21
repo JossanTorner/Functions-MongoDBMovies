@@ -1,6 +1,6 @@
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
+
 public class MovieFunctions {
 
     //Här är klassens instanser av funktionsgränssnitt som kan användas för att göra olika beräkningar med metoderna
@@ -16,7 +16,7 @@ public class MovieFunctions {
     }
 
     //Fråga: Hitta längden på den film som var längst (högst runtime).
-    //Kan hämta längsta, kortaste eller medelvärde runtime av filmer i listan
+    //Kan hämta längsta, kortaste runtime av filmer i listan
     public double getRuntime(List<Movie> movies, Calculator calculator){
         return calculator.calculate(movies.stream().mapToDouble(Movie::getRuntime));
     }
@@ -37,7 +37,7 @@ public class MovieFunctions {
     }
 
     //Fråga: Vad är titeln på den film som hade minst antal skådisar listade?
-    //Ger namn på filmer med störst, minst eller vanligast förekomna storlek på roll-lista
+    //Ger namn på filmer med störst eller minst roll-lista
     public List<String> getMoviesAfterCastSize(List<Movie> movies, Calculator calculator){
         double castSize = calculator.calculate(movies.stream().mapToDouble(e -> e.getCast().size()));
         return movies.stream().filter(e->e.getCast().size() == castSize).map(Movie::getTitle).collect(Collectors.toList());
@@ -45,12 +45,13 @@ public class MovieFunctions {
 
     //Fråga: Hur många skådisar var med i mer än 1 film?
     public long getNumberOfActorsInSeveralMovies(List<Movie> movies){
-        Map<String, Long> actorFrequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
+        Map<String, Long> actorFrequencyMap = movies.stream().map(Movie::getCast)
+                .flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
         return actorFrequencyMap.entrySet().stream().filter(e->e.getValue() > 1).count();
     }
 
     //Fråga: Vad hette den skådis som var med i flest filmer?
-    //Kan få ut skådis/skådisar i flest, minst eller vanligast förekomna antal filmer
+    //Kan få ut skådis/skådisar i flest eller minst filmer
     public List<String> getActorsInAmountOfMovies(List<Movie> movies, Calculator calculator){
         Map<String, Long> actorFrequencyMap = movies.stream().map(Movie::getCast).flatMap(List::stream).collect(Collectors.groupingBy(actor->actor, Collectors.counting()));
         double amountOfMovies = calculator.calculate(actorFrequencyMap.values().stream().mapToDouble(e->e));
